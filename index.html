@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лайки и дизлайки</title>
+    <style>
+        .like-dislike-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+        .button {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .like {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .dislike {
+            background-color: #f44336;
+            color: white;
+        }
+        .count {
+            font-size: 20px;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="like-dislike-container">
+        <button class="button like" onclick="updateCount('like')">👍 Лайк</button>
+        <span class="count" id="like-count">0</span>
+        <button class="button dislike" onclick="updateCount('dislike')">👎 Дизлайк</button>
+        <span class="count" id="dislike-count">0</span>
+    </div>
+
+    <script>
+        // Получение данных из localStorage
+        function getCounts() {
+            const likes = localStorage.getItem('likes') || 0;
+            const dislikes = localStorage.getItem('dislikes') || 0;
+            document.getElementById('like-count').textContent = likes;
+            document.getElementById('dislike-count').textContent = dislikes;
+        }
+
+        // Обновление счетчиков
+        function updateCount(type) {
+            let count = parseInt(localStorage.getItem(type)) || 0;
+            count += 1;
+            localStorage.setItem(type, count);
+            getCounts();
+        }
+
+        // Инициализация
+        getCounts();
+    </script>
+</body>
+</html>
